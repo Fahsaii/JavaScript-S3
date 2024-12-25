@@ -1,6 +1,6 @@
-let arrayLength = 7; 
-let arr1 = []; 
-let arr2 = Array(arrayLength); //function to create array
+let arrayLength = 7;
+let arr1 = [];
+let arr2 = Array(arrayLength);
 let arr3 = ['A',false,5]
 
 //Getting array length

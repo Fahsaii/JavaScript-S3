@@ -13,13 +13,16 @@ console.log("**********Converting strings to float********");
 console.log(parseFloat ('1.25abc'));
 console. log(parseFloat (flo1));
 console. log(parseFloat('ABC'));
+
 console. log("************More Conversion Examples*********");
 //More Conversion Examples
 //Numbers after special characters are ignored
 console. log(parseInt('1.5'));
 console. log(parseInt('1 + 1'));
+
 //Using Template Literals
 console.log(parseInt(`${1 + 1}`));
+
 console.log("*********Converting numbers to strings*********");
 //Converting numbers to strings
 console.log(num1.toString());

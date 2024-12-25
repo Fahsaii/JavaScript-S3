@@ -1,6 +1,6 @@
 function getVowels(str){
     const m = str.match(/[aeiou]/gi);
-    console.log (m);
+console.log(m);
     if (m == null){
         return 0;
     }

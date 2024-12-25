@@ -1,6 +1,5 @@
 const array = [15, 16, 17, 18, 19];
 
-        //ชื่อfunction
 function reduce(accumulator,currentValue,index) {
     const returns = accumulator + currentValue;
     console.log(

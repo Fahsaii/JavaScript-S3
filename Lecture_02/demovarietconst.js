@@ -8,9 +8,9 @@ if(true){
     let Word = "Hello World";
     console.log(Word);
 }
-    //console.log(world);
+// console.log(world);
 
 const fixval = "Fix Value";
 console.log(fixval);
 
-    //fixvar = "tes assigne value to const"
+// fixvar = "tes assigne value to const"
