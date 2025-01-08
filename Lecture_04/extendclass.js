@@ -1,7 +1,7 @@
 // Parent class
 class Media {
     constructor(info) {
-        this.publisDate = info.publisDate;
+        this.publishDate = info.publishDate;
         this.name = info.name;
     }
 }
@@ -17,7 +17,7 @@ class Song extends Media {
 const mySong = new Song ({
     artist: "Queen",
     name: "Bohemian Rhapsody",
-    publisDate: 1975,
+    publishDate: 1975,
 });
 
 console.log(mySong);
