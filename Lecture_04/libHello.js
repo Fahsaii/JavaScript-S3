@@ -16,4 +16,5 @@ const add = (a,b) => a+b;
 
 const status = true;
 
+//ตัวบอกว่าตัวไหนที่อยู่ในนี้สามารถเรียกใช้ได้บ้าง
 module.exports = {person, sayHello,cube,add,status}
