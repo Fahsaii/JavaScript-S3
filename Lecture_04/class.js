@@ -4,10 +4,10 @@ class Song {
         this.author;
     }
 
-    pay(){
+    play(){
         console.log("Song playing!");
     }
 }
 
 const mySong = new Song();
-mySong.pay();
+mySong.play();

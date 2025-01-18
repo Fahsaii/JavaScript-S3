@@ -1,6 +1,6 @@
 
 function totalVolume(...arr) {
-                //ช้ arr.reduce() เพื่อวนลูปผ่านแต่ละอาเรย์ย่อย (แต่ละกล่อง) ใน arr
+                //ใช้ arr.reduce() เพื่อวนลูปผ่านแต่ละอาเรย์ย่อย (แต่ละกล่อง) ใน arr
     const result = arr.reduce((acc,cer) => {
         const arrIn = cer.reduce((acc,cer) => acc * cer, 1);
         return acc + arrIn;
