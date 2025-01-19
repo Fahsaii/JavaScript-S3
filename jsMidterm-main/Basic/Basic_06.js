@@ -1,8 +1,12 @@
 // Apiwat Ketsawong
 
 function removeDups(arr) {
+
     const result = arr.filter((value,index,self) => {
+                    //self.indexOf(value) คืนค่าตำแหน่งแรกที่พบค่า value ในอาเรย์ 
+                    // ค่าที่พบซ้ำจะถูกกรองออก
         return self.indexOf(value) === index;
+
     }) 
     return result;
 }

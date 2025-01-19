@@ -1,4 +1,4 @@
-//
+
 function numberSplit(num) {
                 //ปัดเศษลง             //ปัดเศษขึ้น
     return [Math.floor(num / 2), Math.ceil(num / 2)];

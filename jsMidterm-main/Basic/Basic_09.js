@@ -3,7 +3,7 @@
 function digitalClock(sec) {
     const h = Math.floor((sec / 3600) % 24);
     const m = Math.floor((sec % 3600) / 60);
-    const s = sec % 60;
+    const s = sec % 60; //คำนวณจำนวนวินาทีที่เหลือหลังจากตัดส่วนของชั่วโมงและนาทีออก
 
     const formatH = String(h).padStart(2,'0');
     const formatM = m < 10 ? '0' + m : m;

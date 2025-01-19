@@ -1,16 +1,19 @@
-// Apiwat Ketsawong
-
+// มีหน้าที่คำนวณตำแหน่งของจุดที่ระเบิด (หรือแหล่งเสียง) โดยอาศัยข้อมูลของ เซ็นเซอร์ 3 ตัวที่ตรวจจับเวลาเสียงเดินทางไปถึง 
+// โดยใช้วิธี Triangulation (การหาตำแหน่งโดยการใช้วงกลม 3 วงซ้อนกัน)
 function bomb(sensors) {
-    const area = 51;
-    const speedOfsound = 0.343;
+    const area = 51; //ระบุขนาดของพื้นที่ที่ใช้ (หน่วยเป็นเมตร)
+    const speedOfsound = 0.343; //ความเร็วเสียงในอากาศ (หน่วยเป็นกิโลเมตรต่อวินาที)
+
 
     const positions = sensors.map(sensor => {
-        const positionX = sensor[0] % area;
-        const positionY = sensor[1] % area;
-        const distance = sensor[2] * speedOfsound;
+        const positionX = sensor[0] % area; //ตำแหน่งแนวนอน (แกน x)
+        const positionY = sensor[1] % area; // ตำแหน่งแนวตั้ง (แกน y)
+        const distance = sensor[2] * speedOfsound; // ระยะทางที่เสียงเดินทางมาจากจุดระเบิดไปถึงเซ็นเซอร์ (ระยะ = เวลา × ความเร็ว)
         return { positionX, positionY, distance };
     });
 
+    //h, k: ตำแหน่งจุดศูนย์กลางของวงกลม
+    //r: รัศมีของวงกลม
     const circle1 = { h: positions[0].positionX, k: positions[0].positionY, r: positions[0].distance };
     const circle2 = { h: positions[1].positionX, k: positions[1].positionY, r: positions[1].distance };
     const circle3 = { h: positions[2].positionX, k: positions[2].positionY, r: positions[2].distance };
@@ -23,12 +26,17 @@ function bomb(sensors) {
     const a22 = 2 * (circle3.k - circle2.k);
     const b2 = circle3.r**2 - circle2.r**2 - circle3.h**2 + circle2.h**2 - circle3.k**2 + circle2.k**2;
 
+    //det: ค่าที่ใช้ตรวจสอบว่ามีคำตอบหรือไม่
+    //detX และ detY: คำนวณพิกัดจุดตัดในแกน x และ y
     const det = a11 * a22 - a12 * a21;
     const detX = b1 * a22 - a12 * b2; 
     const detY = a11 * b2 - b1 * a21;
 
+    //ถ้า det === 0 แสดงว่าวงกลมทั้ง 3 ไม่มีจุดตัดร่วมกัน
     if (det === 0) throw "Unable to calculate intersection point";
 
+    //คำนวณจุดตัดในพิกัด x และ y จากค่าของ detX และ detY
+    //ใช้ Math.abs และ Math.round เพื่อปรับค่าที่ได้ให้เป็นค่าบวกและจำนวนเต็ม
     const intersection_X = Math.abs(Math.round(detX / det));
     const intersection_Y = Math.abs(Math.round(detY / det));
     return [intersection_X, intersection_Y];

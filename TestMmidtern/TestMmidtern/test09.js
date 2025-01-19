@@ -1,6 +1,5 @@
 //ใช้สำหรับแปลงจำนวนวินาทีที่ได้รับมาเป็นรูปแบบของเวลาแบบดิจิทัล 
 // HH:MM:SS
-
 //คำนวณชั่วโมง (hours) โดยการหารจำนวนวินาทีทั้งหมดด้วย 
 // 3600 (จำนวนวินาทีใน 1 ชั่วโมง) 
 
@@ -22,8 +21,6 @@ function digitalClock(seconds) {
 
     return `${formattedHours}:${formattedMinutes}:${formattedSeconds}`;
 }
-
-
 console.log(digitalClock(5025)); //01:23:45
 console.log(digitalClock(61201)); //17:00:01 
 console.log(digitalClock(87000)); //00:10:00
