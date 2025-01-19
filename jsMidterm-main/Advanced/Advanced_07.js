@@ -1,5 +1,5 @@
-// Apiwat Ketsawong
-
+//ใช้สำหรับตรวจสอบว่า สตริงตัวเลข (string of digits) เป็น "Additive Number Sequence
+//ลำดับของตัวเลขที่ตัวเลขถัดไปในลำดับมีค่าเท่ากับผลรวมของตัวเลขสองตัวก่อนหน้า
 function isAdditive(str) {
 
     function checkAdditive(num1, num2, remaining) {
@@ -8,6 +8,7 @@ function isAdditive(str) {
         const sum = num1 + num2; 
         const sumStr = sum.toString(); 
 
+                    //ช้เพื่อตรวจสอบว่าสตริงเริ่มต้นด้วยข้อความที่ระบุหรือไม่
         if (!remaining.startsWith(sumStr)) return false;
         
         return checkAdditive(num2, sum, remaining.substring(sumStr.length));
@@ -31,3 +32,7 @@ console.log(isAdditive("129881000"));
 console.log(isAdditive("12988110101891")); 
 console.log(isAdditive("123456789")); 
 console.log(isAdditive("300045007500")); 
+
+//ตัวเลข: 1, 1, 2, 3, 5, 8
+//ลำดับ: 1 + 1 = 2, 1 + 2 = 3, 2 + 3 = 5, 3 + 5 = 8
+//ผลลัพธ์: true (เป็น Additive Sequence)

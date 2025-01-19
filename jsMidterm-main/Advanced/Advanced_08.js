@@ -1,59 +1,52 @@
-// Apiwat Ketsawong
-// ข้อนี้ยังมีช่องโหว่อยู่
-
+//นับจำนวนสัตว์ที่สามารถสร้างได้จากตัวอักษรที่ให้มา (string input) โดยใช้ตัวอักษรในแต่ละคำได้เพียงครั้งเดียว
 function count_animals(str) {
-    const animals = ["dog","cat","bat","cock","cow","pig","fox","ant","bird","lion","wolf","deer","bear","frog","hen","mole","duck","goat"];
-    const checkAnimal01 = [];
-    const checkAnimal02 = [];
-    const checkText = [];
+    const animals = ["dog", "cat", "bat", "cock", "cow", "pig", "fox", "ant", "bird", "lion", "wolf", "deer", "bear", "frog", "hen", "mole", "duck", "goat"];
+    const charCount = {}; // นับจำนวนตัวอักษรในสตริง
+    let maxCount = 0;
 
-    for (let i = 0; i < animals.length; i++) {
-        let count = 0; 
-        for (let j = 0; j < animals[i].length; j++) {
-            if (str.toLowerCase().includes(animals[i][j])) {
-                count++;
+    // สร้างตัวนับจำนวนตัวอักษรในสตริง
+    for (const char of str) {
+        charCount[char] = (charCount[char] || 0) + 1;
+    }
+
+    // Recursive function เพื่อหาจำนวนสัตว์สูงสุด
+    function findMaxAnimals(availableChars, currentCount) {
+        let maxAnimals = currentCount;
+
+        for (const animal of animals) {
+            const charMap = {}; // นับจำนวนตัวอักษรในคำสัตว์
+            let canForm = true;
+
+            for (const char of animal) {
+                charMap[char] = (charMap[char] || 0) + 1;
+                if (charMap[char] > (availableChars[char] || 0)) {
+                    canForm = false;
+                    break;
+                }
+            }
+
+            if (canForm) {
+                // ถ้าสร้างสัตว์ได้ ลดจำนวนตัวอักษรจาก availableChars
+                const newAvailableChars = { ...availableChars };
+                for (const char of animal) {
+                    newAvailableChars[char] -= 1;
+                }
+
+                // เรียกฟังก์ชันแบบ recursive
+                maxAnimals = Math.max(maxAnimals, findMaxAnimals(newAvailableChars, currentCount + 1));
             }
         }
-        if (count === animals[i].length) {
-            checkAnimal01.push(animals[i]);
-        }
-    } 
 
-    for (let i = 0; i < checkAnimal01.length; i++) {
-        let sum = checkAnimal01[i].length;
-        const check = [{name: checkAnimal01[i], length: checkAnimal01[i].length}];
-        for (let j = i + 1; j < checkAnimal01.length; j++) {
-            if (sum + checkAnimal01[j].length <= str.length) {
-                check.push({name: checkAnimal01[j], length: checkAnimal01[j].length});
-                sum += checkAnimal01[j].length;
-            } 
-        } checkAnimal02.push(check);
+        return maxAnimals;
     }
 
-    for (let i = 0; i < checkAnimal02.length; i++) {
-        let text = str;
-        const set = checkAnimal02[i].map(m => m.name);
-        for (let j = 0; j < set.length; j++) {
-            for (let char of set[j]) {
-                if (text.includes(char)) {
-                    text = text.replace(char,'-');
-                } 
-            } 
-        } checkText.push({text: text.replace(/-/gi,''), name: set});
-    }
+    // เรียกฟังก์ชัน recursive เพื่อเริ่มต้นการคำนวณ
+    maxCount = findMaxAnimals(charCount, 0);
 
-    const sort = checkText.map(m => m.text).sort((a,b) => a.length - b.length);
-    const result = checkText.find(item => item.text === sort[0]).name;
-
-    for (let i = 0; i < checkText[0].text.length; i+=result[0].length) {
-        if (result[0] === checkText[0].text.substr(i, result[0].length)) {
-            result.push(checkText[0].text.substr(i, result[0].length));
-        }
-    }
-
-    return result.length;
+    return maxCount;
 }
 
-console.log(count_animals("goatcode")); 
-console.log(count_animals("cockdogwdufrbir")); 
-console.log(count_animals("dogdogdogdogdog"));
+// ทดสอบโค้ด
+console.log(count_animals("goatcode")); // Output: 1 (goat)
+console.log(count_animals("cockdogwdufrbir")); // Output: 3 (cock, dog, bird)
+console.log(count_animals("dogdogdogdogdog")); // Output: 5 (dog, dog, dog, dog, dog)
